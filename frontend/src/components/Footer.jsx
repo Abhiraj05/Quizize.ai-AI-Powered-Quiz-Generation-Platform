@@ -19,9 +19,8 @@ const Footer=()=>{
             <div>
                 <h4 className="font-semibold mb-4">Company</h4>
                 <ul className=" text-sm text-gray-400 flex justify-between items-center gap-3">
+                    <li><span className="hover:text-white transition-colors cursor-pointer">Contact</span></li>
                     <li><span className="hover:text-white transition-colors cursor-pointer">About</span></li>
-                    <li><span className="hover:text-white transition-colors cursor-pointer">Blog</span></li>
-                    <li><span className="hover:text-white transition-colors cursor-pointer">Careers</span></li>
                 </ul>
             </div>
         </div>
