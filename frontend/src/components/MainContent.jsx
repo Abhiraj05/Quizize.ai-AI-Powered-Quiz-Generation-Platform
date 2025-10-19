@@ -15,12 +15,12 @@ const MainContent = () => {
     setloadervalue(true);
     setTimeout(() => {
       setloadervalue(false);
-      navigate("/generate");
+      navigate("/generatequiz");
     }, 1500);
   };
   return (
     <>
-      {loading && <Loader/>}
+      {loading && <Loader />}
       <main id="main-content">
         <section
           id="hero-section"
@@ -35,7 +35,7 @@ const MainContent = () => {
               seconds. Perfect for educators, students, and professionals.
             </p>
             <button
-              className="bg-accent bg-cyan-500 text-white px-8 py-4 rounded-lg md:text-lg font-semibold transition-colors shadow-lg"
+              className="hover:bg-white hover:border-cyan-500 hover:border  hover:rounded-lg  hover:text-cyan-500 bg-accent border border-cyan-500 bg-cyan-500 text-white px-8 py-4 rounded-lg md:text-lg font-semibold transition-colors shadow-lg"
               onClick={activateLoader}
             >
               <FontAwesomeIcon icon={faWandMagicSparkles} className="mr-2" />

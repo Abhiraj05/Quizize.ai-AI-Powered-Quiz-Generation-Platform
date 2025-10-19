@@ -7,11 +7,35 @@ import Loader from "./Loader";
 const NavBar = () => {
    const navigate = useNavigate();
     const [loading, setloadervalue] = useState(false);
-    const activateLoader = () => {
+    const activateLoaderone = () => {
       setloadervalue(true);
       setTimeout(() => {
         setloadervalue(false);
         navigate("/signin");
+      }, 1500);
+    };
+
+    const activateLoadertwo = () => {
+      setloadervalue(true);
+      setTimeout(() => {
+        setloadervalue(false);
+        navigate("/signup");
+      }, 1500);
+    };
+
+       const activateLoaderthree = () => {
+      setloadervalue(true);
+      setTimeout(() => {
+        setloadervalue(false);
+        navigate("/contact");
+      }, 1500);
+    };
+
+       const activateLoaderfour = () => {
+      setloadervalue(true);
+      setTimeout(() => {
+        setloadervalue(false);
+        navigate("/about");
       }, 1500);
     };
   return (
@@ -31,16 +55,16 @@ const NavBar = () => {
             </h1>
           </div>
           <nav className="flex items-center space-x-8">
-            <span className="text-gray-600 hover:text-primary transition-colors cursor-pointer">
+            <span className="text-gray-600 hover:text-primary hover:text-black transition-colors cursor-pointer" onClick={activateLoaderthree}>
               Contact
             </span>
-            <span className="text-gray-600 hover:text-primary transition-colors cursor-pointer">
+            <span className="text-gray-600 hover:text-primary hover:text-black  transition-colors cursor-pointer" onClick={activateLoaderfour}>
               About
             </span>
-            <button className="px-4 py-2 text-primary border border-primary rounded-lg bg-primary  transition-all" onClick={activateLoader}>
+            <button className="px-4 py-2 text-primary border border-primary rounded-lg bg-primary hover:border hover:bg-cyan-500 hover:rounded-lg hover-border hover:text-white  transition-all" onClick={activateLoaderone}>
               Sign In
             </button>
-            <button className="px-4 py-2 bg-primary text-white rounded-lg bg-blue-700 transition-colors">
+            <button className="px-4 py-2 bg-primary border text-white rounded-lg bg-blue-700 hover:border hover:text-cyan-500 hover:bg-white hover:border-cyan-500 hover:rounded-lg hover-border-black transition-colors" onClick={activateLoadertwo}>
               Sign Up
             </button>
           </nav>

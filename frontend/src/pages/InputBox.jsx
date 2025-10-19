@@ -11,7 +11,7 @@ import {
 const InputBox = () => {
   return (
     <>
-    <NavBar></NavBar>
+      <NavBar></NavBar>
       <section id="create-quiz-section" className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
@@ -32,12 +32,12 @@ const InputBox = () => {
                 Enter your Topic or Paste your Text here
               </label>
               <textarea
-                className="w-full h-48 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                className="w-full h-48 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none "
                 placeholder="Type a topic like 'World War II' or paste your text content here..."
               ></textarea>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-3">
                   Quiz Type
@@ -70,8 +70,8 @@ const InputBox = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            <button className="w-full bg-accent bg-cyan-500 text-white py-4 rounded-lg text-lg font-semibold transition-colors">
+            </div> */}
+            <button className="hover:bg-white hover:border-cyan-500 hover:border  hover:rounded-lg  hover:text-cyan-500 w-full bg-accent border border-cyan-500 bg-cyan-500 text-white py-4 rounded-lg text-lg font-semibold transition-colors">
               <FontAwesomeIcon icon={faWandMagicSparkles} className="mr-2" />
               Generate Quiz
             </button>

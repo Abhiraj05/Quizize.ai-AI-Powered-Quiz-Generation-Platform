@@ -1,24 +1,12 @@
-import React ,{useState} from "react";
-import Loader from "../components/Loader";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 
-const SignIn = () => {
-    const navigate = useNavigate();
-  const [loading, setloadervalue] = useState(false);
-  const activateLoader = () => {
-    setloadervalue(true);
-    setTimeout(() => {
-      setloadervalue(false);
-      navigate("/signup");
-    }, 1500);
-  };
+const Contact = () => {
   return (
     <>
-      {loading && <Loader/>}
       <main className="bg-gradient-to-br from-primary via-blue-600 to-accent grid place-items-center h-screen border">
         <div className=" bg-white text-center  pt-18 pb-18 pr-10 pl-10 rounded-2xl">
           <h3 className="capitalize text-[32px] mb-10 text-black font-bold">
-            sign in
+            contact
           </h3>
           <form action="#" className="text-center">
             <div>
@@ -45,7 +33,7 @@ const SignIn = () => {
                 <p>don't have an account ?</p>
               </div>
               <div>
-                <button type="button" className="hover:text-cyan-500 capitalize text-blue-600" onClick={activateLoader} >signup</button>
+                <button type="button" className="hover:text-cyan-500 capitalize text-blue-600"  >signup</button>
               </div>
             </div>
           </form>
@@ -54,4 +42,4 @@ const SignIn = () => {
     </>
   );
 };
-export default SignIn;
+export default Contact;
