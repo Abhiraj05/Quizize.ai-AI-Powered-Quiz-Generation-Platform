@@ -11,18 +11,18 @@ const MainContent = () => {
         className="bg-gradient-to-br from-primary via-blue-600 to-accent h-[600px] flex items-center"
       >
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-5xl font-bold text-white mb-6">
+          <h1 className="md:text-5xl text-4xl font-bold text-white mb-6 sm:flex-wrap">
             Create Quizzes Instantly with AI
           </h1>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto sm:flex-wrap">
             Turn any topic, text, or document into an interactive quiz in
             seconds. Perfect for educators, students, and professionals.
           </p>
-          <button className="bg-accent bg-cyan-500 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors shadow-lg">
+          <button className="bg-accent bg-cyan-500 text-white px-8 py-4 rounded-lg md:text-lg font-semibold transition-colors shadow-lg">
             <FontAwesomeIcon icon={faWandMagicSparkles} className="mr-2" />
             Generate Your Quiz Now
           </button>
-          <div className="mt-12 flex items-center justify-center space-x-8 text-blue-100">
+          <div className="mt-12 flex flex-col items-center justify-center space-y-4 md:flex-row md:space-y-0 md:space-x-8 text-blue-100 text-center">
             <div className="flex items-center">
             <FontAwesomeIcon icon={faCircleCheck} className="mr-2" />
               <span>Sign Up to Get Started</span>

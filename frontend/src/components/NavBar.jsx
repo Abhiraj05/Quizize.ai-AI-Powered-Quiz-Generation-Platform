@@ -14,7 +14,7 @@ const NavBar = () => {
             <div className="w-10 h-10 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center">
               <FontAwesomeIcon icon={faBrain} className="mr-2" />
             </div>
-            <h1 className="text-xl font-bold text-gray-900">
+            <h1 className="md:text-xl text-lg font-bold text-gray-900">
               AI Quiz Generator
             </h1>
           </div>
