@@ -52,13 +52,13 @@ const NavBar = () => {
             } md:flex md:space-x-8 md:static md:flex-row md:justify-center md:items-center md:space-y-0 md:bg-transparent md:shadow-none`}
           >
             <span
-              className="text-gray-600 hover:text-primary hover:text-black cursor-pointer transition-colors"
+              className="hover:text-gray-600 hover:text-primary text-black cursor-pointer transition-colors"
               onClick={() => activateLoader("/contact")}
             >
               Contact
             </span>
             <span
-              className="text-gray-600 hover:text-primary hover:text-black cursor-pointer transition-colors"
+              className="hover:text-gray-600 hover:text-primary text-black cursor-pointer transition-colors"
               onClick={() => activateLoader("/about")}
             >
               About
