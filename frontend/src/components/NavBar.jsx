@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBrain, faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
+import image from "../assets/ChatGPT Image Oct 20, 2025, 05_36_34 PM.png";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -24,18 +25,17 @@ const NavBar = () => {
 
       <header className="bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 w-full z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          
-          {/* Logo Section */}
           <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center">
-              <FontAwesomeIcon icon={faBrain} className="text-black" />
-            </div>
-            <h1 className="text-lg md:text-xl font-bold text-gray-900 hover:text-gray-500">
-              <button onClick={() => navigate("/")}>AI Quiz Generator</button>
-            </h1>
+            <button onClick={() => navigate("/")}>
+              <div className="rounded-lg flex items-center justify-around gap-2 hover:opacity-70">
+                <img className="md:h-10 md:w-20 h-8 w-16" src={image} alt="" />
+                 {/* <h1 className="text-[15px] md:text-xl font-bold text-gray-900 uppercase">
+                  Quizify
+              </h1> */}
+              </div>
+            </button>
           </div>
 
-          {/* Hamburger Icon (Mobile) */}
           <div className="md:hidden">
             <FontAwesomeIcon
               icon={menuOpen ? faXmark : faBars}
@@ -44,7 +44,6 @@ const NavBar = () => {
             />
           </div>
 
-          {/* Navbar Links */}
           <nav
             className={`${
               menuOpen

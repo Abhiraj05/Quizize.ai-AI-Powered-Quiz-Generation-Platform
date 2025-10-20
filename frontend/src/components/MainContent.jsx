@@ -28,7 +28,7 @@ const MainContent = () => {
         >
           <div className="max-w-7xl mx-auto px-6 text-center">
             <h1 className="md:text-5xl text-4xl font-bold text-white mb-6 sm:flex-wrap">
-              Create Quizzes Instantly with AI
+              Create Quizzes <span className="text-[#FE9D1B]">Instantly with AI</span>
             </h1>
             <p className="md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto sm:flex-wrap">
               Turn any topic, text, or document into an interactive quiz in
