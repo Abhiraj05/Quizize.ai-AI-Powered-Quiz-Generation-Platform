@@ -1,9 +1,11 @@
 import React from "react";
-
+import NavBar from "../components/NavBar"
+import Footer from "../components/Footer"
 
 const About=()=>{
     return(
         <>
+        <NavBar></NavBar>
         <div className="bg-white min-h-screen flex flex-col items-center justify-center px-6 py-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-6">
           About AI Quiz Generator
@@ -25,6 +27,7 @@ const About=()=>{
           Our goal is to make learning interactive, efficient, and fun — one quiz at a time.
         </p>
       </div>
+      <Footer></Footer>
         </>
     )
 }

@@ -71,7 +71,7 @@ const InputBox = () => {
                 </div>
               </div>
             </div> */}
-            <button className="hover:bg-white hover:border-cyan-500 hover:border  hover:rounded-lg  hover:text-cyan-500 w-full bg-accent border border-cyan-500 bg-cyan-500 text-white py-4 rounded-lg text-lg font-semibold transition-colors">
+            <button className="hover:bg-white hover:border-cyan-500 hover:border  hover:rounded-lg  hover:text-cyan-500 w-full  bg-accent border border-cyan-500 bg-cyan-500 text-white py-2 rounded-lg text-[17px] font-semibold transition-colors">
               <FontAwesomeIcon icon={faWandMagicSparkles} className="mr-2" />
               Generate Quiz
             </button>

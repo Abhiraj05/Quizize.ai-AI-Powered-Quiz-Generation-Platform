@@ -50,8 +50,8 @@ const NavBar = () => {
             <div className="w-10 h-10 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center">
               <FontAwesomeIcon icon={faBrain} className="mr-2" />
             </div>
-            <h1 className="md:text-xl text-lg font-bold text-gray-900">
-              AI Quiz Generator
+            <h1 className="md:text-xl text-lg font-bold text-gray-900 hover:text-gray-500">
+             <button onClick={()=>navigate("/")}>AI Quiz Generator</button> 
             </h1>
           </div>
           <nav className="flex items-center space-x-8">
