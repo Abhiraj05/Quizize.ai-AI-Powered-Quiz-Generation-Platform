@@ -25,7 +25,7 @@ const InputBox = () => {
 
           <div
             id="quiz-creator-card"
-            className="bg-white rounded-xl shadow-lg border border-gray-200 p-8"
+            className="bg-white rounded-xl shadow-lg border border-gray-200 p-6"
           >
             <div className="mb-6">
               <label className="block text-[15px] md:text-[16px] font-semibold text-gray-700 mb-3">
@@ -71,7 +71,7 @@ const InputBox = () => {
                 </div>
               </div>
             </div> */}
-            <button className="hover:bg-white hover:border-cyan-500 hover:border  hover:rounded-lg  hover:text-cyan-500 w-full  bg-accent border border-cyan-500 bg-cyan-500 text-white py-2 rounded-lg md:text-[17px] text-[15px] font-semibold transition-colors">
+            <button className="hover:bg-white hover:border-cyan-500 hover:border  hover:rounded-lg  hover:text-cyan-500 w-full  bg-accent border border-cyan-500 bg-cyan-500 text-white py-2 rounded-lg md:text-[17px] text-[16px] font-semibold transition-colors">
               <FontAwesomeIcon icon={faWandMagicSparkles} className="mr-2" />
               Generate Quiz
             </button>

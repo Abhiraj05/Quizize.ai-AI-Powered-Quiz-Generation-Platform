@@ -38,7 +38,7 @@ const Contact = () => {
               <label htmlFor="name" className="capitalize text-gray-700 md:text-[15px] text-[14px]">your name*</label>
               </div>
                 <input
-                  className="border  border-gray-500 w-66 h-10 md:w-80 md:h-12 mb-6 rounded-xl pl-5 placeholder:capitalize placeholder:text-[14px]"
+                  className="border  border-gray-500 w-70 h-13 md:w-80 md:h-12 mb-6 rounded-xl pl-3 placeholder:capitalize placeholder:text-[14px]"
                   type="text"
                   placeholder="enter your name"
                 />
@@ -48,7 +48,7 @@ const Contact = () => {
               <label htmlFor="email" className="capitalize text-gray-700 md:text-[15px] text-[14px]">your email*</label>
               </div>
                 <input
-                  className="border  border-gray-500 w-66 h-10 md:w-80 md:h-12 mb-6 rounded-xl pl-5 placeholder:capitalize placeholder:text-[14px]"
+                  className="border  border-gray-500 w-70 h-13 md:w-80 md:h-12 mb-6 rounded-xl pl-3 placeholder:capitalize placeholder:text-[14px]"
                   type="email"
                   placeholder="enter your email"
                 />
@@ -58,12 +58,12 @@ const Contact = () => {
               <label htmlFor="message" className="capitalize text-gray-700 md:text-[15px] text-[14px]">your message*</label>
               </div>
                 <textarea
-                  className="mb-10 w-66 h-30 md:w-80 md:h-35 p-4 border  border-gray-500 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none placeholder:capitalize placeholder:text-[14px]"
+                  className="mb-10 w-70 h-30 md:w-80 md:h-35 p-3 border  border-gray-500 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none placeholder:capitalize placeholder:text-[14px]"
                   placeholder="enter your message"
                 ></textarea>
               </div>
               <div>
-                <button className="hover:bg-white hover:border-cyan-500 hover:border  hover:rounded-lg  hover:text-cyan-500 bg-accent bg-cyan-500 text-white font-semibold capitalize border pt-2 pb-2 md:px-30 px-24 rounded-xl md:text-[17px] text-[15px]">
+                <button className="hover:bg-white hover:border-cyan-500 hover:border  hover:rounded-lg  hover:text-cyan-500 bg-accent bg-cyan-500 text-white font-semibold capitalize border pt-2 pb-2 md:px-30 px-28 rounded-xl md:text-[17px] text-[17px]">
                   submit
                 </button>
               </div>
