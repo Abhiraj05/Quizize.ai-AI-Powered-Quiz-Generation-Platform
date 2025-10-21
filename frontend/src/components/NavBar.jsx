@@ -8,12 +8,15 @@ import image from "../assets/ChatGPT Image Oct 21, 2025, 06_18_51 PM-Photoroom.p
 const NavBar = () => {
   const navigate = useNavigate();
   const [loading, setLoaderValue] = useState(false);
+  const [display,setDisplayValue]=useState(true)
   const [menuOpen, setMenuOpen] = useState(false);
 
   const activateLoader = (path) => {
     setLoaderValue(true);
+    setDisplayValue(false)
     setTimeout(() => {
       setLoaderValue(false);
+      setDisplayValue(true)
       navigate(path);
       setMenuOpen(false); // Close menu after navigation
     }, 1500);
@@ -24,7 +27,7 @@ const NavBar = () => {
       {loading && <Loader />}
   
       
-      <header className="bg-gradient from-primary  to-accent  shadow-sm fixed top-0 left-0 w-full z-50">
+      {display && <header className="bg-gradient from-primary  to-accent  shadow-sm fixed top-0 left-0 w-full z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <button onClick={() => navigate("/")}>
@@ -75,7 +78,7 @@ const NavBar = () => {
             </button>
           </nav>
         </div>
-      </header>
+      </header>}
     </>
   );
 };
