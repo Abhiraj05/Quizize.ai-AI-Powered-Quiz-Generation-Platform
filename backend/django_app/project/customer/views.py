@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework_simplejwt.tokens import RefreshToken
-from customer.models import Customer
+from customer.models import Customer,LLMResponse
 from customer.serializer import CustomerRegistrationFormSerializer
 # Create your views here.
 
@@ -69,3 +69,18 @@ class UserLogin(APIView):
             return Response({"message", "invalid credentials!"}, status=status.HTTP_400_BAD_REQUEST)
         except User.DoesNotExist:
             return Response({"message": "user not registerd"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_data(request):
+    user_data=LLMResponse.objects.filter(user=request.user.id).values("id","user_input","llm_response")
+    return Response({"user_data":user_data})
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_username(request):
+    username=User.objects.filter(id=request.user.id).values("username")
+    return Response({"username":username})
