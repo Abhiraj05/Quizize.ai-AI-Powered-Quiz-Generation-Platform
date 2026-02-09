@@ -9,7 +9,7 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setloadervalue] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
+    customer_email: "",
     password: "",
   });
 
@@ -19,11 +19,22 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.username || !formData.password) {
+    if (!formData.customer_email || !formData.password) {
+      setFormData({
+        customer_email: "",
+        password: "",
+      });
       alert("please fill the form");
     } else {
       try {
-        await axios.post("http://127.0.0.1:8000/user_form/user_signin/",formData);
+        const response=await axios.post(
+          "http://127.0.0.1:8000/user_form/user_signin/",
+          formData,
+        );
+        
+        localStorage.setItem("access_token", response.data.access);
+        localStorage.setItem("refresh_token", response.data.refresh);
+        navigate("/generatequiz")
         alert("login successful");
       } catch {
         console.error("failed to signin");
@@ -63,9 +74,9 @@ const SignIn = () => {
                   </label>
                 </div>
                 <input
-                  name="username"
+                  name="customer_email"
                   className="border  border-gray-500 w-70 h-13 md:w-80 md:h-12 mb-6 rounded-xl pl-3 placeholder:capitalize placeholder:text-[14px]"
-                  value={formData.username}
+                  value={formData.customer_email}
                   onChange={handleChange}
                   type="text"
                   placeholder="enter the username"

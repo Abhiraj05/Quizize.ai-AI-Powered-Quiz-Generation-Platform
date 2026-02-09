@@ -32,6 +32,11 @@ const InputBox = () => {
         const response = await axios.post(
           "http://127.0.0.1:8000/generate_quiz/",
           textData,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          }
         );
         setQuizData(response.data.generated_quiz);
         setTextData({
@@ -46,6 +51,7 @@ const InputBox = () => {
   };
   return (
     <>
+    {console.log(localStorage.getItem("access_token"))}
       <NavBar></NavBar>
       <section
         id="create-quiz-section"
@@ -124,6 +130,7 @@ const InputBox = () => {
               </div>
             </div> */}
               <button
+                type="submit"
                 className={`w-full py-2 rounded-lg md:text-[17px] text-[16px] font-semibold transition-colors text-white
                 border border-cyan-500
                 ${

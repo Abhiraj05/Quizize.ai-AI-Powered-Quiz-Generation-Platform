@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
+import axios from "axios";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setloadervalue] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
+    customer_email: "",
     password: "",
   });
 
@@ -20,18 +21,25 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.username || !formData.password) {
+    if (!formData.customer_email || !formData.password) {
       alert("please fill the form");
     }
-    if(formData.password!==confirmPassword) {
-        alert("password does not match")
-    }
-    else {
+    if (formData.password !== confirmPassword) {
+      alert("password does not match");
+    } else {
       try {
-        await axios.post("http://127.0.0.1:8000/user_form/user_signup/",formData);
-        alert("register successfully");
+        const response=await axios.post(
+          "http://127.0.0.1:8000/user_form/user_signup/",
+          formData,
+        );
+        setFormData({
+          customer_email: "",
+          password: "",
+        });
+        setConfirmPassword("")
+        alert(response.data.message);
       } catch {
-        console.error("failed to signin");
+        alert("failed to signup");
       }
     }
   };
@@ -68,9 +76,9 @@ const SignUp = () => {
                   </label>
                 </div>
                 <input
-                  name="username"
+                  name="customer_email"
                   className="border  border-gray-500 w-70 h-13 md:w-80 md:h-12 mb-6 rounded-xl pl-3 placeholder:capitalize placeholder:text-[14px]"
-                  value={formData.username}
+                  value={formData.customer_email}
                   onChange={handleChange}
                   type="text"
                   placeholder="enter the username"
@@ -116,7 +124,8 @@ const SignUp = () => {
                   <input
                     className="border  border-gray-500 w-70 h-13 md:w-80 md:h-12 mb-10 rounded-xl pl-3 placeholder:capitalize placeholder:text-[14px]"
                     type={showConfirmPassword ? "text" : "password"}
-                    onChange={(e)=>setConfirmPassword(e.target.value)}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    value={confirmPassword}
                     placeholder="enter the confirm password"
                   />
                   <button
