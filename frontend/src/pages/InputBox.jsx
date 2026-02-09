@@ -238,7 +238,7 @@ const InputBox = () => {
         </div>
       </section>
 
-      <Footer />
+      <Footer></Footer>
     </>
   );
 };

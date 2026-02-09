@@ -8,6 +8,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setloadervalue] = useState(false);
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [formData, setFormData] = useState({
     customer_email: "",
     password: "",
@@ -26,19 +27,22 @@ const SignIn = () => {
       });
       alert("please fill the form");
     } else {
+      setSubmitLoading(true);
       try {
-        const response=await axios.post(
+        const response = await axios.post(
           "http://127.0.0.1:8000/user_form/user_signin/",
           formData,
         );
-        
+
         localStorage.setItem("access_token", response.data.access);
         localStorage.setItem("refresh_token", response.data.refresh);
-        navigate("/generatequiz")
+        navigate("/generatequiz");
         alert("login successful");
       } catch {
         console.error("failed to signin");
       }
+      setSubmitLoading(true);
+
     }
   };
   const activateLoader = () => {
@@ -110,8 +114,26 @@ const SignIn = () => {
                 </div>
               </div>
               <div>
-                <button className="hover:bg-white hover:border-cyan-500 hover:border  hover:rounded-lg  hover:text-cyan-500 bg-accent bg-cyan-500 text-white font-semibold capitalize border pt-2 pb-2 md:px-30 px-28  rounded-xl  text-[17px]">
-                  submit
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={submitLoading}
+                 className={`font-semibold capitalize border pt-2 pb-2 w-72 mx-auto rounded-xl text-[17px] transition flex items-center justify-center gap-2
+                   ${
+                     submitLoading
+                       ? "bg-cyan-400 cursor-not-allowed text-white border-cyan-400"
+                       : "bg-cyan-500 text-white hover:bg-white hover:text-cyan-500 hover:border-cyan-500"
+                   }`}
+
+                >
+                  {submitLoading ? (
+                    <>
+                      <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                      Submitting...
+                    </>
+                  ) : (
+                    "Submit"
+                  )}
                 </button>
               </div>
               <div className="flex justify-center items-center gap-2 capitalize mt-5 text-[15px]">
