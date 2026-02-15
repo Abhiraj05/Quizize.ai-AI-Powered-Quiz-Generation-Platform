@@ -1,5 +1,5 @@
 from django.urls import path
-from customer.views import UserLogin,UserRegistrationForm,get_user_data,get_username,reset_password,set_new_password
+from customer.views import UserLogin,UserRegistrationForm,get_user_data,get_username,reset_password,set_new_password,delete_quiz
 
 urlpatterns = [
     path('user_signup/',UserRegistrationForm.as_view(),name="user_signup"),
@@ -7,5 +7,6 @@ urlpatterns = [
     path('user_data/',get_user_data),
     path('get_username/',get_username),
     path('forgot_password/',reset_password),
-    path('reset_password/',set_new_password)
+    path('reset_password/',set_new_password),
+    path('delete_quiz/<int:quiz_id>',delete_quiz)
 ]

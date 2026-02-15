@@ -25,6 +25,6 @@ urlpatterns = [
     path('generate_quiz/',generate_quiz),
     path('get_user_data/',include('customer.urls')),
     path('password/',include('customer.urls')),
-    path('user_feedback/',submit_feedback_form)
+    path('user_feedback/',submit_feedback_form),
 ]
 

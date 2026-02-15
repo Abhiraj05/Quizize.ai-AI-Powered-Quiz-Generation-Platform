@@ -27,7 +27,6 @@ def file_text_extract(file):
     try:
         result = md.convert(temp_path)
         text = result.text_content
-        print(text)
     except Exception as e:
         if not isinstance(text, str):
             return None
@@ -47,18 +46,18 @@ def generate_quiz(request):
     if user_input_data:
         response = requests.get("http://127.0.0.1:8001/generate_quiz", json={
                                 "text": user_input_data, "num_of_questions": num_of_questions})
-        LLMResponse.objects.create(
+        quiz=LLMResponse.objects.create(
             user=user_instance, user_input=user_input_data, llm_response=response.json())
-        return JsonResponse({"user_input": user_input_data, "generated_quiz_data": response.json()}, safe=False)
+        return JsonResponse({"id":quiz.id,"user_input": user_input_data, "generated_quiz_data": response.json()}, safe=False)
     else:
         text = file_text_extract(file)
         if not text:
             return JsonResponse({"error": "Failed to extract text"}, status=400)
         response = requests.get("http://127.0.0.1:8001/generate_quiz",
                                 json={"text": text, "num_of_questions": num_of_questions})
-        LLMResponse.objects.create(
+        quiz=LLMResponse.objects.create(
             user=user_instance, user_input=text, llm_response=response.json())
-        return JsonResponse({"user_input": text, "generated_quiz_data": response.json()}, safe=False)
+        return JsonResponse({"id":quiz.id,"user_input": text, "generated_quiz_data": response.json()}, safe=False)
 
 
 @api_view(['POST'])
