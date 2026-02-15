@@ -5,13 +5,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faListCheck,
   faWandMagicSparkles,
+  faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "motion/react";
 import axios from "axios";
 import QuizDisplay from "../components/QuizDisplay";
 
 const InputBox = () => {
-  const [textData, setTextData] = useState({ text_data: "", num_of_questions: "", file: "" });
+  const [textData, setTextData] = useState({
+    text_data: "",
+    num_of_questions: "",
+    file: "",
+  });
   const [quizData, setQuizData] = useState([]);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [selectedText, setSelectedText] = useState("");
@@ -19,6 +24,25 @@ const InputBox = () => {
   const [loading, setLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const token = localStorage.getItem("access_token");
+
+  const deleteQuiz = async (id) => {
+    try {
+      const response = await axios.post(
+        `http://127.0.0.1:8000/user_form/delete_quiz/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        },
+      );
+      window.location.reload();
+      alert("quiz delete successfully");
+    } catch (error) {
+      console.error("failed to delete quiz", error);
+      alert("failed to delete quiz");
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,21 +75,23 @@ const InputBox = () => {
     e.preventDefault();
     if (!token) {
       alert("please login to generate a quiz");
-    }
-    else {
+    } else {
       if (!textData.text_data && !textData.file) {
         alert("please enter the text or select a pdf/doc file !");
         return;
       }
-      if(textData.text_data && textData.file){
+      if (textData.text_data && textData.file) {
         alert("please either enter the text or select a pdf/doc file !");
-        return; 
+        return;
       }
       if (!textData.num_of_questions) {
-        alert("please select the quiz count !")
-        return
+        alert("please select the quiz count !");
+        return;
       }
-      if (!textData.text_data && textData.file || textData.text_data && !textData.file) {
+      if (
+        (!textData.text_data && textData.file) ||
+        (textData.text_data && !textData.file)
+      ) {
         setLoading(true);
         try {
           const formData = new FormData();
@@ -87,7 +113,7 @@ const InputBox = () => {
           );
 
           const newQuizItem = {
-            id: Date.now(),
+            id: response.data.id,
             user_input: response.data.user_input,
             generated_quiz: response.data.generated_quiz_data.generated_quiz,
           };
@@ -97,9 +123,11 @@ const InputBox = () => {
           setSelectedText(newQuizItem.user_input);
           setViewMode(true);
           setTextData({ text_data: "", num_of_questions: "", file: "" });
+          setLoading(false);
           alert("quiz generated successfully");
         } catch (error) {
           console.error("failed to generate quiz's", error);
+          alert("failed to generated quiz");
         }
         setLoading(false);
       }
@@ -131,8 +159,9 @@ const InputBox = () => {
 
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`fixed top-0 left-0 h-full w-80 bg-gradient-to-b from-primary to-blue-700 text-white shadow-2xl transform transition-transform duration-300 z-50 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+        className={`fixed top-0 left-0 h-full w-80 bg-gradient-to-b from-primary to-blue-700 text-white shadow-2xl transform transition-transform duration-300 z-50 ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
         <div className="p-5 flex justify-between items-center border-b bg-cyan-500 border-white/20">
           <h2 className="text-xl font-bold capitalize">history</h2>
@@ -141,24 +170,36 @@ const InputBox = () => {
 
         <div className="p-4 space-y-3 overflow-y-auto h-[calc(100%-70px)]">
           {quizData.map((item) => (
-            <div
-              key={item.id}
-              className="bg-gradient-to-l from-gray-900 via-gray-800 to-gray-900 text-gray-200 rounded-lg p-3 cursor-pointer hover:scale-[1.02] transition"
-              onClick={() => {
-                setSelectedText(item.user_input);
+            <>
+              <div className=" flex justify-center items-center bg-gradient-to-l from-gray-900 via-gray-800 to-gray-900 px-3 rounded-xl">
+                <div
+                  key={item.id}
+                  className=" text-gray-200 rounded-lg p-3 cursor-pointer hover:scale-[1.02] transition"
+                  onClick={() => {
+                    setSelectedText(item.user_input);
 
-                const quiz =
-                  item.generated_quiz ||
-                  item.llm_response?.generated_quiz ||
-                  [];
+                    const quiz =
+                      item.generated_quiz ||
+                      item.llm_response?.generated_quiz ||
+                      [];
 
-                setSelectedQuiz(quiz);
-                setViewMode(true);
-                setSidebarOpen(false);
-              }}
-            >
-              {item.user_input.slice(0, 60)}...
-            </div>
+                    setSelectedQuiz(quiz);
+                    setViewMode(true);
+                    setSidebarOpen(false);
+                  }}
+                >
+                  {item.user_input.slice(0, 60)}...
+                </div>
+                <div>
+                  <button onClick={() => deleteQuiz(item.id)}>
+                    <FontAwesomeIcon
+                      icon={faTrashCan}
+                      className="hover:text-gray-400"
+                    />
+                  </button>
+                </div>
+              </div>
+            </>
           ))}
         </div>
       </div>
@@ -225,7 +266,11 @@ const InputBox = () => {
                         value={textData.num_of_questions}
                       >
                         {" "}
-                        <option className="capitalize text-gray-700" value="" disabled>
+                        <option
+                          className="capitalize text-gray-700"
+                          value=""
+                          disabled
+                        >
                           Select Quiz Count
                         </option>
                         <option value="5">5 Questions</option>
@@ -235,17 +280,23 @@ const InputBox = () => {
                       </select>
                     </div>
                     <div>
-                      <input className="border-2 border-gray-300 placeholder:text-gray-300 px-2 py-2 rounded-xl text-[14px] mb-4" type="file" name="file" onChange={handleChange} />
+                      <input
+                        className="border-2 border-gray-300 placeholder:text-gray-300 px-2 py-2 rounded-xl text-[14px] mb-4"
+                        type="file"
+                        name="file"
+                        onChange={handleChange}
+                      />
                     </div>
                   </div>
                   <button
                     type="submit"
                     className={`w-full py-2 rounded-lg md:text-[17px] text-[16px] font-semibold transition-colors text-white
                 border border-cyan-500
-                ${loading
-                        ? "bg-cyan-400 cursor-not-allowed"
-                        : "bg-cyan-500 hover:bg-white hover:text-cyan-500 hover:border hover:rounded-lg"
-                      }
+                ${
+                  loading
+                    ? "bg-cyan-400 cursor-not-allowed"
+                    : "bg-cyan-500 hover:bg-white hover:text-cyan-500 hover:border hover:rounded-lg"
+                }
                `}
                   >
                     {loading ? (

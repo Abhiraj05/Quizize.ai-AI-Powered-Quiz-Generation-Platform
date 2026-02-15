@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { motion } from "motion/react";
@@ -8,7 +9,49 @@ import {
   faPhone,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [submitLoading, setSubmitLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+      alert("please fill the form");
+    } else {
+      setSubmitLoading(true);
+      try {
+        const response = await axios.post(
+          "http://127.0.0.1:8000/user_feedback/",
+          formData,
+        );
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+        alert("feedback submitted");
+      } catch {
+        console.error("failed to submit");
+        alert("failed to submit the feedback");
+      }
+      setSubmitLoading(false);
+    }
+  };
   return (
     <>
       <NavBar></NavBar>
@@ -55,7 +98,7 @@ const Contact = () => {
             </div>
           </div>
           <div className="bg-white pt-10 pb-8 md:pt-12 md:pb-10 pr-8 pl-8 rounded-2xl max-w-md">
-            <form action="#" method="POST" className="text-center">
+            <form action="#" onSubmit={handleSubmit} className="text-center">
               <div>
                 <div className="text-left mb-2">
                   <label
@@ -69,6 +112,8 @@ const Contact = () => {
                   className="border  border-gray-500 w-70 h-13 md:w-80 md:h-12 mb-6 rounded-xl pl-3 placeholder:capitalize placeholder:text-[14px]"
                   type="text"
                   name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="enter your name"
                 />
               </div>
@@ -85,6 +130,8 @@ const Contact = () => {
                   className="border  border-gray-500 w-70 h-13 md:w-80 md:h-12 mb-6 rounded-xl pl-3 placeholder:capitalize placeholder:text-[14px]"
                   type="email"
                   name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="enter your email"
                 />
               </div>
@@ -100,12 +147,31 @@ const Contact = () => {
                 <textarea
                   className="mb-10 w-70 h-30 md:w-80 md:h-35 p-3 border  border-gray-500 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none placeholder:capitalize placeholder:text-[14px]"
                   name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="enter your message"
                 ></textarea>
               </div>
               <div>
-                <button className="hover:bg-white hover:border-cyan-500 hover:border  hover:rounded-lg  hover:text-cyan-500 bg-accent bg-cyan-500 text-white font-semibold capitalize border pt-2 pb-2 md:px-30 px-28 rounded-xl md:text-[17px] text-[17px]">
-                  submit
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={submitLoading}
+                  className={`font-semibold capitalize border pt-2 pb-2 w-80 mx-auto rounded-xl text-[17px] transition flex items-center justify-center gap-2
+                   ${
+                     submitLoading
+                       ? "bg-cyan-400 cursor-not-allowed text-white border-cyan-400"
+                       : "bg-cyan-500 text-white hover:bg-white hover:text-cyan-500 hover:border-cyan-500"
+                   }`}
+                >
+                  {submitLoading ? (
+                    <>
+                      <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                      Submitting...
+                    </>
+                  ) : (
+                    "submit"
+                  )}
                 </button>
               </div>
             </form>

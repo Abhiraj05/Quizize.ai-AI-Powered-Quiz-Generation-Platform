@@ -16,13 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from main.views import generate_quiz
+from main.views import generate_quiz,submit_feedback_form
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user_form/', include('customer.urls')),
     path('generate_quiz/',generate_quiz),
-    path('get_user_data/',include('customer.urls'))
+    path('get_user_data/',include('customer.urls')),
+    path('password/',include('customer.urls')),
+    path('user_feedback/',submit_feedback_form),
 ]
 
