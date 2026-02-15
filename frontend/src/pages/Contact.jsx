@@ -9,6 +9,7 @@ import {
   faPhone,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -38,6 +39,11 @@ const Contact = () => {
           "http://127.0.0.1:8000/user_feedback/",
           formData,
         );
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
         alert("feedback submitted");
       } catch {
         console.error("failed to submit");
