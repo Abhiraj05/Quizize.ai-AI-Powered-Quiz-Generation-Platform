@@ -10,7 +10,7 @@ An intelligent application that uses AI to automatically generate multiple-choic
 - **File Support**: Extract text from PDFs, documents, and other file formats
 - **Customizable Questions**: Specify the number of questions you want generated
 - **Responsive UI**: Modern interface built with React and Tailwind CSS
-- **Email Notifications**: Feedback form with email integration
+
 
 ## Architecture
 
